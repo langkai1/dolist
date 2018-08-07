@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>便签</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    body{
+        background: #cdcdcd;
+    }
+    .header{
+        width: auto;
+        height: 50px;
+        background: rgba(47,47,47,0.98);
+    }
+    .con{
+        width: 600px;
+        height: 50px;
+        margin: 0 auto;
+    }
+    .con lable{
+        line-height: 50px;
+        color: #ddd;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .con input{
+        float: right;
+        width: 60%;
+        height: 24px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        box-shadow: 0 1px 0 rgba(255,255,255,.24) inset;
+        padding: 1px 0 0 10px;
+        margin-top: 12px;
+    }
+    .boxing{
+        width: 600px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .boxing h3{
+        padding: 20px 0;
+        font-size: 23px;
+        /*height: 30px;*/
+        /*line-height: 30px;*/
+    }
+    .boxing span{
+        font-weight: bold;
+
+    }
+    .boxing i{
+        display: block;
+        float: right;
+        font-size: 13px;
+        background: #e6e6fa;
+        border-radius: 18px;
+        padding: 0 5px ;
+        text-align: center;
+    }
+    .bg{
+        width: 600px;
+        height: auto;
+    }
+    .inFor{
+        width: auto;
+        height: 32px;
+        background: #fff;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border-left: 5px solid #629a9c;
+    }
+    .inF_input{
+        display: block;
+        float: left;
+        width: 22px;
+        height: 22px;
+        margin: 6px 0 0 15px;
+    }
+    .text{
+        width: 505px;
+        height: 32px;
+        float: left;
+        margin-left: 15px;
+        line-height: 32px;
+        color: #333333;
+    }
+    .name{
+        display: block;
+        width: 100%;
+        height:100%;
+        margin: 0;
+        color: blue;
+        outline: none;
+        border: none;
+    }
+    .btn{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #CCCCCC;
+        float: right;
+        margin: 6px 10px 0  0;
+        cursor: pointer;
+    }
+    .btn::after{
+        display: block;
+        content: "-";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        text-align: center;
+        line-height: 10px;
+        margin: 3px 3px;
+    }
+    .inFor1{
+        background: #909090;
+        opacity: .5;
+    }
+</style>
+<body>
+<!--头部开始-->
+<header class="header">
+    <div class="con">
+        <!--标签-->
+        <lable for="text">ToDoList</lable>
+        <input type="text" id="text" placeholder="请添加ToDo">
+    </div>
+</header>
+<!--正在进行-->
+<div class="boxing">
+    <h3>
+        <span>正在进行</span>
+        <i>0</i>
+    </h3>
+    <div class="bg">
+        <!--<div class="inFor">
+            <input type="checkbox">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>-->
+        <!--<div class="inFor">
+            <input type="checkbox">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor">
+            <input type="checkbox">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor">
+            <input type="checkbox">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor">
+            <input type="checkbox">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>-->
+    </div>
+</div>
+<!--已经完成开始-->
+<div class="boxing">
+    <h3>
+        <span>已经完成</span>
+        <i>0</i>
+    </h3>
+    <div class="bg">
+       <div class="inFor inFor1">
+            <input type="checkbox" checked="checked" class="inF_input">
+            <div class="text">
+                <input type="text" class="name">
+            </div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor inFor1">
+            <input type="checkbox" checked="checked">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor inFor1">
+            <input type="checkbox" checked="checked">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor inFor1">
+            <input type="checkbox" checked="checked">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+        <div class="inFor inFor1">
+            <input type="checkbox" checked="checked">
+            <div class="text"></div>
+            <div class="btn"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let arr1=localStorage.arr1 ? localStorage.arr1.split(","):[];
+    let arr2=localStorage.arr2 ? localStorage.arr2.split(","):[];
+    let bg1=document.querySelectorAll(".bg")[0];
+    let bg2=document.querySelectorAll(".bg")[1];
+    let enter=document.querySelector("#text");
+    let i1=document.querySelectorAll("i")[0];
+    let i2=document.querySelectorAll("i")[1];
+    upDate();
+    function upDate() {
+        bg1.innerHTML="";
+        bg2.innerHTML="";
+        enter.value="";
+        i1.innerHTML=arr1.length;
+        i2.innerHTML=arr2.length;
+         arr1.forEach(function (item,index) {
+             let inFor=document.createElement("div");
+             inFor.className="inFor";
+             bg1.appendChild(inFor);
+
+
+             let input=document.createElement("input");
+             input.type="checkbox";
+             input.className="inF_input";
+             inFor.appendChild(input);
+             input.onclick=function (){
+                 arr1.splice(index,1);
+                 arr2.unshift(item);
+                 upDate();
+             }
+
+             let text=document.createElement("div");
+             text.className="text";
+             text.innerHTML=item;
+             inFor.appendChild(text);
+             text.ondblclick=function () {
+                 let input=document.createElement("input");
+                 input.classList="name";
+                 let con=this.innerText;
+                 this.innerText="";
+                 input.value=con;
+                 input.onkeydown=function (e) {
+                     /*flag=false;*/
+                     if (e.keyCode==13&&this.value!=""){
+                         arr1[index]=this.value;
+                         upDate();
+                     }
+                 }
+                 input.onblur=function () {
+                     /*if (!flag){
+                         return;
+                     }*/
+                     arr1[index]=this.value;
+                     upDate();
+                 }
+                 text.appendChild(input);
+             }
+
+             let btn=document.createElement("div");
+             btn.className="btn";
+             inFor.appendChild(btn);
+             btn.onclick=function () {
+                 arr1.splice(index,1);
+                 upDate();
+             }
+         })
+        arr2.forEach(function (item,index) {
+            let inFor1=document.createElement("div");
+            inFor1.className="inFor";
+            inFor1.classList.add("inFor1");
+            bg2.appendChild(inFor1);
+
+
+            let input=document.createElement("input");
+            input.type="checkbox";
+            input.checked="checked";
+            input.className="inF_input";
+            inFor1.appendChild(input);
+            input.onclick=function (){
+                arr2.splice(index,1);
+                arr1.unshift(item);
+                upDate();
+            }
+
+            let text=document.createElement("div");
+            text.className="text";
+            text.innerHTML=item;
+            inFor1.appendChild(text);
+            text.ondblclick=function () {
+                let input=document.createElement("input");
+                input.classList="name";
+                let con=this.innerText;
+                this.innerText="";
+                input.value=con;
+                let flag=true;
+                input.onkeydown=function (e) {
+                    flag=false;
+                    if (e.keyCode==13&&this.value!=""){
+                        arr2[index]=this.value;
+                        upDate();
+                    }
+                }
+                input.onblur=function () {
+                    if (!flag){
+                     return;
+                     }
+                    arr2[index]=this.value;
+                    upDate();
+                }
+                text.appendChild(input);
+            }
+
+            let btn=document.createElement("div");
+            btn.className="btn";
+            inFor1.appendChild(btn);
+            btn.onclick=function () {
+                arr2.splice(index,1);
+                upDate();
+            }
+        })
+        localStorage.arr1=arr1.join(",");
+        localStorage.arr2=arr2.join(",");
+     }
+
+    enter.onkeydown=function (e) {
+        if(e.keyCode==13&&this.value!=""){
+            arr1.unshift(this.value);
+            upDate();
+        }
+    }
+</script>
+</html>
